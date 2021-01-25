@@ -1,0 +1,14 @@
+syntax = "proto3";
+package myProto;
+
+service MyGRpc {
+    rpc Caculate (ReqMsg) returns (ResMsg) {}
+}
+
+message ReqMsg {
+    string msgStr = 1;
+}
+
+message ResMsg {
+    int32 msgInt = 1;
+}
