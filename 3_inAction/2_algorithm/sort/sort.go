@@ -1,9 +1,5 @@
 package sort
 
-import (
-	"fmt"
-)
-
 // 冒泡排序
 func Sort_bubble(nums []int) {
 	for i := 0; i < len(nums)-1; i++ {
@@ -43,35 +39,39 @@ func Sort_insertion(nums []int) {
 	}
 }
 
-// 希尔排序
+// 希尔排序（分组的插入排序）
 func Sort_shell(nums []int) {
 	for stepLength := len(nums) / 2; stepLength >= 1; stepLength = stepLength / 2 {
-		fmt.Printf("==============================[StepLength: %d]==============================\n", stepLength)
-		for i := 0; i < len(nums); i++ {
-			fmt.Printf("%d   ", nums[i])
-			if (i+1)%stepLength == 0 {
-				fmt.Println()
-			}
-		}
-		fmt.Println()
-
 		for i := 0; i < stepLength; i++ {
-			for j := i; j+stepLength < len(nums); {
-				if nums[j] > nums[j+stepLength] {
-					nums[j+stepLength], nums[j] = nums[j], nums[j+stepLength]
+			for idx, j := i+stepLength, i+stepLength; j < len(nums); {
+				if idx >= stepLength && nums[idx] < nums[idx-stepLength] {
+					nums[idx], nums[idx-stepLength] = nums[idx-stepLength], nums[idx]
+					idx -= stepLength
 				} else {
 					j += stepLength
+					idx = j
 				}
 			}
 		}
+	}
+}
 
-		for i := 0; i < len(nums); i++ {
-			fmt.Printf("%d   ", nums[i])
-			if (i+1)%stepLength == 0 {
-				fmt.Println()
+// 归并排序
+func Sort_merge(nums []int) {
+
+}
+
+// 快速排序
+func Sort_quick(nums []int) {
+	left, right := 0, len(nums) - 1
+	for i, j := 0, len(nums)-1; i <= j; {
+		for idx := i; idx < len(nums); idx++ {
+			if nums[idx] > nums[i] {
+				nums[idx], nums[i] = nums[i], nums[idx]
+				j = idx
 			}
 		}
-		fmt.Println()
-		fmt.Println(nums)
+
+		for idx :=
 	}
 }
